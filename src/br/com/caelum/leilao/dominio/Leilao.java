@@ -15,10 +15,22 @@ public class Leilao {
 	}
 
 	public void propoe(Lance lance) {
-		lances.add(lance);
-		if(!lances.get(lances.size()-1).getUsuario().getNome().equals(lance.getUsuario().getNome()))
-			lances.add(lance);	
+		int count = 0;
+		for (Lance rec : lances) {
+			if(rec.getUsuario().equals(lance.getUsuario()))
+				count++;
+		}
+		if(lances.size() == 0 || !repeatesUsers(lance) && count < 5)
+			lances.add(lance);
+		
 
+
+	}
+	
+	private boolean  repeatesUsers(Lance lance){
+		if(lances.get(lances.size()-1).getUsuario().getNome().equals(lance.getUsuario().getNome()))
+				return true;
+		return false;
 	}
 
 	public String getDescricao() {
